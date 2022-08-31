@@ -31,14 +31,14 @@ the games I play are only Tower Of Fantasy and Genshin Impact. The rest I only s
 <br>
 
 <p align = "center">
-  <img  src = "https://github-readme-stats.vercel.app/api?username=Y4zidd&show_icons=true&theme=radical&line_height=27">
-  <img src = "https://github-readme-stats.vercel.app/api/top-langs/?username=Y4zidd&hide=html,css,java,shaderlab,kotlin,hlsl&theme=radical">
+  <img  src = "https://github-readme-stats.vercel.app/api?username=Hraa&show_icons=true&theme=radical&line_height=27">
+  <img src = "https://github-readme-stats.vercel.app/api/top-langs/?username=Hraa&hide=html,css,java,shaderlab,kotlin,hlsl&theme=radical">
 </p>
 
 <p align = "center">
- <img  src="https://github-readme-streak-stats.herokuapp.com/?user=Y4zidd&show_icons=true&locale=en&layout=compact&theme=radical&line_height=0" />
+ <img  src="https://github-readme-streak-stats.herokuapp.com/?user=Hraa&show_icons=true&locale=en&layout=compact&theme=radical&line_height=0" />
 </p> 
 
 <p align = "center">
- <img src="https://activity-graph.herokuapp.com/graph?username=Y4zidd&theme=redical">
+ <img src="https://activity-graph.herokuapp.com/graph?username=Hraa&theme=redical">
 </p> 

@@ -5,16 +5,10 @@
 
   <p align="center">
   <font face="Baskerville">
-  <br> Hello, welcome to my github, My Name Is Yazid Istiqlal Adhy Fadhillah.I come from Indonesia, I'm Learning Front End, Html And Css. 
+  <br> Hello, welcome to my github, My Name Is Hara Akmal Ardhani.I come from Indonesia, I'm Learning Front End, Html And Css. 
 My daily activities are just sleeping, eating, and playing the computer, 
-the games I play are only Osu and Valorant. The rest I only see content on social media.</br></font>
+the games I play are only Tower Of Fantasy and Genshin Impact. The rest I only see content on social media.</br></font>
 </p>
-
-<p align="center">
-<a href="https://osu.ppy.sh/users/29848041" style="color: #fff;">Osu Profile</a></button>
-
-<p align="center">
-<a href="https://raw.githubusercontent.com/Y4zidd/Y4zidd/main/AristiaEdit%20but%20SZ.zip" style="color: #fff;">Osu Skin</a></button>
 
 <p align="center">
 <a href="https://youtu.be/dQw4w9WgXcQ" style="color: #fff;">🎉 Surprise 🎉</a></button>
@@ -28,7 +22,7 @@ the games I play are only Osu and Valorant. The rest I only see content on socia
 </p>
 
 <h2 align="center">
-  Mamah Eneng Ulo <img src="https://media.giphy.com/media/xUA7aZeLE2e0P7Znz2/giphy.gif" width="50">
+  Ulo Gondrong <img src="https://media.giphy.com/media/xUA7aZeLE2e0P7Znz2/giphy.gif" width="50">
 </h2>
 <p align="center">
   <img src="https://github.com/ritik307/ritik307/raw/output/github-contribution-grid-snake.svg" alt="snake"></center>

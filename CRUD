@@ -1,0 +1,341 @@
+1. config.php----------------------------------------------------------------------------------------------------------------------------------------------------------
+<?php
+
+$server         = "localhost";
+$user           = "root";
+$password       = "";
+$nama_database  = "db_ukk";
+
+$db = mysqli_connect($server, $user, $password, $nama_database);
+
+if( !$db ){
+    die("Gagal terhubung dengan database: " . mysqli_connect_error());
+}
+
+?>
+
+2. index.php-----------------------------------------------------------------------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Daftar Siswa</title>
+    <style>
+        fieldset{
+            border-width: 7px;
+            border-radius: 15px;
+            width: 50%;
+            margin-left: 23%;
+        }
+
+        .line1{
+            margin-right: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+    <header>
+        <center>
+        <h3>Pendaftaran Siswa Baru</h3>
+        <h1>SMK Telkom Lampung</h1>
+        </center>
+    </header>
+
+
+        <center>
+    <h4>Menu</h4>
+        </center>
+    <nav>
+        <center>
+        <a class="line1" href="form-daftar.php">Daftar Baru</a>
+        <a href="list-siswa.php">Pendaftar</a>
+        <center>
+    </nav>
+        
+
+
+    <?php if(isset($_GET['status'])): ?>
+    <p>
+        <?php
+            if($_GET['status'] == 'sukses'){
+                echo "Pendaftaran siswa baru berhasil!";
+            } else {
+                echo "Pendaftaran gagal!";
+            }
+        ?>
+    </p>
+<?php endif; ?>
+    </fieldset>
+</body>
+
+
+</html>
+
+3. list-siswa.php------------------------------------------------------------------------------------------------------------------------------------------------------
+<?php include("config.php"); ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Siswa</title>
+    <style>
+        fieldset{
+            border-width: 7px;
+            border-radius: 15px;
+            width: 50%;
+            margin-left: 23%;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <header>
+        <center>
+        <h2>DAFTAR SISWA YANG SUDAH MENDAFTAR</h2>
+        </center>
+    </header>
+
+    <fieldset >
+
+    <nav>
+        <a href="form-daftar.php">[+] Tambah Baru</a>
+    </nav>
+
+    <br>
+
+    <table border="1">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nama</th>
+            <th>Jurusan</th>
+            <th>Jenis Kelamin</th>
+            <th>Asal Sekolah</th>
+            <th>Tanggal Lahir</th>
+            <th>Agama</th>
+            <th>Alamat</th>
+            <th>No Telpon</th>
+            <th>Email</th>
+            <th>Tindakan</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php
+        $sql = "SELECT * FROM tb_ukk1";
+        $query = mysqli_query($db, $sql);
+
+        while($siswa = mysqli_fetch_array($query)){
+            echo "<tr>";
+
+            echo "<td>".$siswa['id']."</td>";
+            echo "<td>".$siswa['nama']."</td>";
+            echo "<td>".$siswa['jurusan']."</td>";
+            echo "<td>".$siswa['jenis_kelamin']."</td>";
+            echo "<td>".$siswa['asal_sekolah']."</td>";
+            echo "<td>".$siswa['tanggal_lahir']."</td>";
+            echo "<td>".$siswa['agama']."</td>";
+            echo "<td>".$siswa['alamat']."</td>";
+            echo "<td>".$siswa['no_telpon']."</td>";
+            echo "<td>".$siswa['email']."</td>";
+
+            echo "<td>";
+            echo "<a href='form-edit.php?id=".$siswa['id']."'>Edit</a> | ";
+            echo "<a href='hapus.php?id=".$siswa['id']."'>Hapus</a>";
+            echo "</td>";
+
+            echo "</tr>";
+        }
+        ?>
+
+    </tbody>
+    </table>
+
+    <p>Total: <?php echo mysqli_num_rows($query) ?></p>
+
+    </fieldset>
+
+    </body>
+</html>
+
+4. form-daftar.php-----------------------------------------------------------------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Siswa</title>
+    <style>
+        fieldset{
+            border-width: 7px;
+            border-radius: 15px;
+            width: 50%;
+            margin-left: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+    <header>
+        <center>
+            <b>
+        Form Pendaftaran Siswa Baru<br>
+        SMK Telkom Lampung<br>
+        Tahun 2023/2024
+            </b>
+        </center>
+    </header>
+
+    <form action="proses-pendaftaran.php" method="POST">
+
+        <p>
+            <label for="nama">Nama </label>
+            <input type="text" name="nama" placeholder="Input Nama" />
+        </p>
+        <p>
+            <label for="jurusan">Jurusan yang dipilih </label>
+            <select name="jurusan">
+                <option>Pilih Jurusan</option>
+                <option>RPL</option>
+                <option>TKJ</option>
+                <option>TJAT</option>
+                <option>Animasi</option>
+            </select>
+        </p>
+        <p>
+            <label for="jenis_kelamin">Jenis Kelamin </label>
+            <label><input type="radio" name="jenis_kelamin" value="laki-laki"> Laki-laki</label>
+            <label><input type="radio" name="jenis_kelamin" value="perempuan"> Perempuan</label>
+        </p>
+        <p>
+            <label for="asal_sekolah">Asal Sekolah </label>
+            <input type="text" name="asal_sekolah" placeholder="Input Asal Sekolah" />
+        </p>
+        <p>
+            <label for="tanggal_lahir">Tanggal Lahir </label>
+            <input type="date" name="tanggal_lahir">
+        </p>
+        <p>
+            <label for="agama">Agama </label>
+            <select name="agama">
+                <option>Pilih Agama</option>
+                <option>Islam</option>
+                <option>Kristen</option>
+                <option>Protestan</option>
+                <option>Hindu</option>
+                <option>Budha</option>
+                <option>Kong Hu Chu</option>
+            </select>
+        </p>
+        <p>
+            <label for="alamat">Alamat Lengkap </label>
+            <textarea name="alamat"></textarea>
+        </p>
+        <p>
+            <label for="no_telpon">No. Telpon</label>
+            <input type="text" name="no_telpon" placeholder="Input No. Telpon" />
+        </p>
+        <p>
+            <label for="email">Email</label>
+            <input type="text" name="email" placeholder="Input Email" />
+        </p>
+        <p>
+            <input type="submit" value="Daftar" name="daftar" />
+        </p>
+
+        </fieldset>
+
+    </form>
+
+    </body>
+</html>
+
+5. proses-pendaftaran.php----------------------------------------------------------------------------------------------------------------------------------------------
+<?php
+
+include("config.php");
+
+if(isset($_POST['daftar'])){
+    $nama = $_POST['nama'];
+    $jurusan = $_POST['jurusan'];
+    $kelamin = $_POST['jenis_kelamin'];
+    $sekolah = $_POST['asal_sekolah'];
+    $tgllahir = $_POST['tanggal_lahir'];
+    $agama = $_POST['agama'];
+    $alamat = $_POST['alamat'];
+    $notelp = $_POST['no_telpon'];
+    $email = $_POST['email'];
+
+    $sql = "INSERT INTO tb_ukk1 (nama, jurusan, jenis_kelamin, asal_sekolah, tanggal_lahir, agama, alamat, no_telpon, email) VALUE ('$nama', '$jurusan', '$kelamin', '$sekolah', '$tgllahir', '$agama', '$alamat', '$notelp', '$email')";
+    $query = mysqli_query($db, $sql);
+
+    if( $query ) {
+        header('location: index.php?status=sukses');
+    } else {
+        header('location: index.php?status=gagal');
+    }
+
+} else {
+    die("Akses dilarang...");
+}
+
+?>
+
+6. hapus.php-----------------------------------------------------------------------------------------------------------------------------------------------------------
+<?php
+
+include("config.php");
+
+if( isset($_GET['id']) ){
+
+    $id = $_GET['id'];
+
+    $sql = "DELETE FROM tb_ukk1 WHERE id=$id";
+    $query = mysqli_query($db, $sql);
+
+    if( $query ){
+        header('location: list-siswa.php');
+    } else {
+        die("gagal menghapus...");
+    }
+
+} else {
+    die("akses dilarang...");
+}
+
+?>
+
+7. proses-edit.php-----------------------------------------------------------------------------------------------------------------------------------------------------
+<?php
+
+include("config.php");
+
+if(isset($_POST['simpan'])){
+
+    $id = $_POST['id'];
+    $nama = $_POST['nama'];
+    $jurusan = $_POST['jurusan'];
+    $kelamin = $_POST['jenis_kelamin'];
+    $sekolah = $_POST['asal_sekolah'];
+    $tgllahir = $_POST['tanggal_lahir'];
+    $agama = $_POST['agama'];
+    $alamat = $_POST['alamat'];
+    $notelp = $_POST['no_telpon'];
+    $email = $_POST['email'];
+
+    $sql = "UPDATE tb_ukk1 SET nama='$nama', jurusan='$jurusan', jenis_kelamin='$kelamin', asal_sekolah='$sekolah', tanggal_lahir='$tgllahir', agama='$agama', alamat='$alamat', no_telpon='$notelp', email='$email' WHERE id='$id'";
+    $query = mysqli_query($db, $sql);
+
+    if($query){
+        header('location: list-siswa.php');
+    }else{
+        die("Gagal menyimpan perubahan...");
+    }
+
+}else{
+    die("Akses dilarang...");
+}
+
+?>

@@ -339,3 +339,115 @@ if(isset($_POST['simpan'])){
 }
 
 ?>
+
+8. form-edit.php-------------------------------------------------------------------------------------------------------------------------------------------------------
+<?php
+include("config.php");
+
+if( !isset($_GET['id']) ){
+    header('location: list-siswa.php');
+}
+
+$id = $_GET['id'];
+
+$sql = "SELECT * FROM tb_ukk1 WHERE id=$id";
+$query = mysqli_query($db, $sql);
+$siswa = mysqli_fetch_assoc($query);
+
+if( mysqli_num_rows($query) < 1 ){
+    die("data tidak ditemukan...");
+}
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Siswa</title>
+    <style>
+        fieldset{
+            border-width: 7px;
+            border-radius: 15px;
+            width: 50%;
+            margin-left: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h3>Formulir Edit Siswa</h3>
+    </header>
+
+    <form action="proses-edit.php" method="POST">
+
+        <fieldset>
+
+            <input type="hidden" name="id" value="<?php echo $siswa['id'] ?>" />
+
+        <p>
+            <label for="nama">Nama Siswa </label>
+            <input type="text" name="nama" placeholder="Input Nama" value="<?php echo $siswa['nama'] ?>" />
+        </p>
+        <p>
+            <label for="jurusan">Jurusan yang dipilih </label>
+            <?php $jurusan = $siswa['jurusan']; ?>
+            <select name="jurusan">
+                <option> Pilih Jurusan </option>
+                <option <?php echo ($jurusan == 'RPL') ? "selected": "" ?>>RPL</option>
+                <option <?php echo ($jurusan == 'TKJ') ? "selected": "" ?>>TKJ</option>
+                <option <?php echo ($jurusan == 'TJAT') ? "selected": "" ?>>TJAT</option>
+                <option <?php echo ($jurusan == 'Animasi') ? "selected": "" ?>>Animasi</option>
+            </select>
+        </p>
+        <p>
+            <label for="jenis_kelamin">Jenis Kelamin </label>
+            <?php $kelamin = $siswa['jenis_kelamin']; ?>
+            <label><input type="radio" name="jenis_kelamin" value="laki-laki" <?php echo ($kelamin == 'laki-laki') ? "checked": "" ?>> Laki-laki</label>
+            <label><input type="radio" name="jenis_kelamin" value="perempuan" <?php echo ($kelamin == 'perempuan') ? "checked": "" ?>> Perempuan</label>
+        </p>
+        <p>
+            <label for="asal_sekolah">Asal Sekolah </label>
+            <input type="text" name="asal_sekolah" placeholder="Input Asal Sekolah" value="<?php echo $siswa['asal_sekolah'] ?>" />
+        </p>
+        <p>
+            <label for="tanggal_lahir">Tanggal Lahir </label>
+            <input type="date" name="tanggal_lahir" value="<?php echo $siswa['tanggal_lahir'] ?>" />
+        </p>
+        <p>
+            <label for="agama">Agama </label>
+            <?php $agama = $siswa['agama']; ?>
+            <select name="agama">
+                <option> Pilih Agama </option>
+                <option <?php echo ($agama == 'Islam') ? "selected": "" ?>>Islam</option>
+                <option <?php echo ($agama == 'Kristen') ? "selected": "" ?>>Kristen</option>
+                <option <?php echo ($agama == 'Protestan') ? "selected": "" ?>>Protestan</option>
+                <option <?php echo ($agama == 'Hindu') ? "selected": "" ?>>Hindu</option>
+                <option <?php echo ($agama == 'Budha') ? "selected": "" ?>>Budha</option>
+                <option <?php echo ($agama == 'Kong Hu Chu') ? "selected": "" ?>>Kong Hu Chu</option>
+            </select>
+        </p>
+        <p>
+            <label for="alamat">Alamat Lengkap</label>
+            <textarea name="alamat"><?php echo $siswa['alamat'] ?></textarea>
+        </p>
+        <p>
+            <label for="no_telpon">No. Telpon </label>
+            <input type="text" name="no_telpon" placeholder="Input No. Telpon" value="<?php echo $siswa['no_telpon'] ?>" />
+        </p>
+        <p>
+            <label for="email">Email </label>
+            <input type="text" name="email" placeholder="Input Email" value="<?php echo $siswa['email'] ?>" />
+        </p>
+        <p>
+            <input type="submit" value="Simpan" name="simpan" />
+        </p>
+
+        </fieldset>
+
+
+    </form>
+
+    </body>
+</html>
